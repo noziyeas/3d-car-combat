@@ -8,5 +8,10 @@ export default defineConfig({
         ws: true,
       }
     }
-  }
+  },
+  base: '/3d-car-combat/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  },
 }); 

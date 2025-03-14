@@ -15,8 +15,19 @@ const playersListDiv = document.getElementById('playersList');
 function startGame() {
     playerName = playerNameInput.value.trim();
     if (playerName) {
-        connectToServer();
         loginScreen.style.display = 'none';
+        // Initialize game state
+        state.score = 0;
+        state.health = 100;
+        updateScoreDisplay();
+        updatePlayerHealthBar();
+        
+        // Update players list with just the current player
+        updatePlayersList([{
+            id: 'player1',
+            name: playerName + ' (You)',
+            score: 0
+        }]);
     }
 }
 
@@ -158,51 +169,21 @@ function updatePlayerNamePosition(id) {
     }
 }
 
-function updatePlayersList() {
+function updatePlayersList(players) {
     if (!playersListDiv) return;
 
-    // Get all players including the current player
-    const allPlayers = [...otherPlayers.entries()].map(([id, player]) => ({
-        id,
-        name: player.name,
-        score: player.score
-    }));
-    
-    // Add current player
-    allPlayers.push({
-        id: playerId,
-        name: playerName + ' (You)',
-        score: state.score
-    });
+    // Sort players by score
+    players.sort((a, b) => b.score - a.score);
 
-    // Sort players by score in descending order
-    allPlayers.sort((a, b) => b.score - a.score);
-
-    // Update the players list div styling
-    playersListDiv.style.position = 'fixed';
-    playersListDiv.style.top = '20px';
-    playersListDiv.style.right = '20px';
-    playersListDiv.style.padding = '15px';
-    playersListDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    playersListDiv.style.color = 'white';
-    playersListDiv.style.fontFamily = 'Arial, sans-serif';
-    playersListDiv.style.fontSize = '16px';
-    playersListDiv.style.borderRadius = '10px';
-    playersListDiv.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
-    playersListDiv.style.minWidth = '200px';
-    playersListDiv.style.zIndex = '1000';
-
-    // Create the HTML content
+    // Update the players list div
     let html = `
         <div style="font-weight: bold; margin-bottom: 10px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;">
             Player Rankings
         </div>
     `;
 
-    // Add each player with their rank
-    allPlayers.forEach((player, index) => {
+    players.forEach((player, index) => {
         const rank = index + 1;
-        const isCurrentPlayer = player.name.includes('(You)');
         const rankColor = rank === 1 ? '#ffd700' : rank === 2 ? '#c0c0c0' : rank === 3 ? '#cd7f32' : 'white';
         
         html += `
@@ -211,7 +192,6 @@ function updatePlayersList() {
                 justify-content: space-between;
                 align-items: center;
                 padding: 5px 0;
-                ${isCurrentPlayer ? 'font-weight: bold; color: #00ff00;' : ''}
                 margin: 2px 0;
             ">
                 <span style="color: ${rankColor};">#${rank}</span>
