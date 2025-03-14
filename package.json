@@ -1,0 +1,23 @@
+{
+  "name": "multiplayer-car-game",
+  "version": "1.0.0",
+  "description": "A multiplayer 3D car combat game",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "concurrently \"vite\" \"node server.js\"",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "three": "^0.162.0",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "vite": "^5.1.4"
+  }
+}

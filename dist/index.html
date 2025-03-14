@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Car Combat</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #loginScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #loginForm {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+        }
+        #loginForm h1 {
+            color: #ff3333;
+            margin-bottom: 30px;
+        }
+        #playerName {
+            padding: 10px 15px;
+            font-size: 18px;
+            width: 250px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        #startButton {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #startButton:hover {
+            background-color: #ff6666;
+        }
+        #playersList {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 200px;
+            z-index: 1000;
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/index-QEP0K6DY.js"></script>
+</head>
+<body>
+    <div id="loginScreen">
+        <div id="loginForm">
+            <h1>Car Combat</h1>
+            <input type="text" id="playerName" placeholder="Enter your name" maxlength="15" autofocus>
+            <br>
+            <button id="startButton">Start Game</button>
+        </div>
+    </div>
+    <div id="playersList"></div>
+</body>
+</html> 
